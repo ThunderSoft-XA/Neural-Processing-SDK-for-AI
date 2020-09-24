@@ -1,0 +1,2 @@
+models/alexnet/dlc/bvlc_alexnet.dlc filter=lfs diff=lfs merge=lfs -text
+models/alexnet/caffe/bvlc_alexnet.caffemodel filter=lfs diff=lfs merge=lfs -text

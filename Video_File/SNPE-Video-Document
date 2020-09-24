@@ -1,0 +1,47 @@
+Hello everyone, Today we will show the results of the Neural Processing SDK for AI demo.
+
+The main function of this demonstration is to develop a classification neural network based on Qualcomm's Neural Processing SDK for AI.
+
+
+The hardware used in this demonstration mainly includes PC, Qualcomm platform SDM865 development board and USB type-C data cable.
+
+The software used includes Qualcomm Neural Processing SDK for AI, Caffe, TensorFlow
+
+
+
+The demo development process is mainly:
+
+1. First install and configure Caffe and TensorFlow, please refer to the official website introduction: https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk/getting-started and SDK official document: file:///home/zx/Downloads /snpe-1.29.0.456/doc/html/setup_caffe.html&&file:///home/zx/Downloads/snpe-1.29.0.456/doc/html/setup_tensorflow.html.
+
+2. Next, you need to configure the SDK environment. The SDK provides two scripts to verify the environment. The commands are as follows:
+source ~/snpe-sdk/bin/dependencies.sh
+source ~/snpe-sdk/bin/check_python_depends.sh
+
+3. Initialize the environment of Qualcomm SDK, this operation is required for each terminal in the future:
+1) Caffe: source $SNPE/bin/envsetup.sh -c ~/caffe
+2) TensorFlow: source $SNPE/bin/envsetup.sh -t ~/tensorflow
+
+4. Download the neural network model and convert it to a .DLC file through the SDK:
+1) Caffe: python $SNPE/models/alexnet/scripts/setup_alexnet.py -a ./temp-assets-cache -d
+2) TensorFlow: python $SNPE/models/inception_v3/scripts/setup_inceptionv3.py -a ./temp-assets-cache -d
+
+5. Run the script to verify the neural network model:
+cd $SNPE_ROOT/models/alexnet/
+1) Caffe:
+cd $SNPE_ROOT/models/alexnet/
+python scripts/show_alexnet_classifications.py -i data/cropped/raw_list.txt -o output/ -l data/ilsvrc_2012_labels.txt
+2) TensorFlow:
+cd $SNPE_ROOT/models/inception_v3/
+python scripts/show_inceptionv3_classifications.py -i data/cropped/raw_list.txt -o output/ -l data/imagenet_slim_labels.txt
+
+
+
+Next, we will demonstrate the running effect of the demonstration.
+
+First connect the development board, the PC end is controlled through the USB serial cable and enters the development board;
+Enter the path of SNPE under the development board, and verify whether the environment has been configured through the script;
+Initialize the development environment of SDK;
+Run the scripts corresponding to different network models under models, and we can see the results of their classification below.
+
+
+This is the end of this demo, thank you, goodbye!

@@ -1,0 +1,48 @@
+
+大家好，今天我们将展示Neural Processing SDK for AI演示的结果。
+
+本次演示的主要功能是开发基于高通Neural Processing SDK for AI的分类神经网络。
+
+
+本次演示使用的硬件主要包括PC、高通平台SDM865开发板和USB type-C数据线。
+
+使用的软件包括高通Neural Processing SDK for AI、Caffe、TensorFlow
+
+
+
+演示的开发过程主要是：
+
+1。首先安装配置Caffe和TensorFlow，可参考官网介绍：https://developer.qualcomm.com/software/qualcomm-neural-processing-sdk/getting-started和SDK官方文档：file:///home/zx/Downloads/snpe-1.29.0.456/doc/html/setup_caffe.html&&file:///home/zx/Downloads/snpe-1.29.0.456/doc/html/setup_tensorflow.html。
+
+2。接下来需要配置SDK环境，SDK提供的有两个脚本来验证环境，命令如下：
+source ~/snpe-sdk/bin/dependencies.sh
+source ~/snpe-sdk/bin/check_python_depends.sh
+
+3。初始化高通SDK的环境，以后每个终端都需要此操作：
+1）Caffe: source $SNPE/bin/envsetup.sh -c ~/caffe
+2）TensorFlow: source $SNPE/bin/envsetup.sh -t ~/tensorflow
+
+4。下载神经网络模型并通过SDK转换为.DLC文件：
+1）Caffe:  python $SNPE/models/alexnet/scripts/setup_alexnet.py -a ./temp-assets-cache -d
+2) TensorFlow: python $SNPE/models/inception_v3/scripts/setup_inceptionv3.py -a ./temp-assets-cache -d
+
+5。运行脚本对神经网络模型进行验证：
+cd $SNPE_ROOT/models/alexnet/
+1）Caffe: 
+cd $SNPE_ROOT/models/alexnet/
+python scripts/show_alexnet_classifications.py -i data/cropped/raw_list.txt -o output/ -l data/ilsvrc_2012_labels.txt
+2) TensorFlow:  
+cd $SNPE_ROOT/models/inception_v3/
+python scripts/show_inceptionv3_classifications.py -i data/cropped/raw_list.txt -o output/ -l data/imagenet_slim_labels.txt
+
+
+
+接下来，我们将演示演示的运行效果。
+
+首先连接开发板，PC端通过USB串口线控制并进入开发板；
+进入开发板下SNPE的路径，然后通过脚本验证环境是否已配置完成；
+初始化SDK的开发环境；
+进入models下运行不同网络模型对应的脚本，下面我们就可以看到其分类的结果了。
+
+
+本次演示就到此结束了，谢谢，再见！
